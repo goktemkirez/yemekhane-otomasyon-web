@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import authAxios from "../../components/axios";
 import {
   Box,
   Button,
@@ -16,65 +15,43 @@ import {
 import { Skeleton } from "@material-ui/lab";
 import { AddOutlined, DeleteOutlined } from "@material-ui/icons";
 
+import authAxios from "../../components/axios";
 import { useStyles } from "./Users.style";
+import CreateUserModal from "./components/CreateUserModal";
 
 function Users() {
   const classes = useStyles();
   const [loading, setLoading] = useState(false);
-  const [userListData, setUserListData] = useState([]);
+  const [userList, setUserList] = useState([]);
+  const [isCreateUserModalOpen, setIsCreateUserModalOpen] = useState(false);
 
   useEffect(() => {
-    getUserListData();
+    getUserList();
   }, []);
 
-  const getUserListData = async () => {
+  const getUserList = async () => {
     try {
       setLoading(true);
 
       const result = await authAxios.get(`/users`);
       console.log(result.data);
-      setUserListData(result.data);
+      setUserList(result.data);
     } catch (error) {
       console.log("error", error);
     } finally {
-      setTimeout(() => {
-        setLoading(false);
-      }, 1000);
-    }
-  };
-
-  const createUser = async () => {
-    try {
-      const result = await authAxios.get(`/me`);
-      const response = await authAxios.post(
-        `/users/${result.data.id}/playlists`,
-        {
-          name: "New Playlist",
-          description: "New playlist description",
-          public: false,
-        }
-      );
-      console.log(response.data);
-    } catch (error) {
-      console.log("error", error);
-    } finally {
-    }
-  };
-
-  const deactivateUser = async (playlistId) => {
-    try {
-      const response = await authAxios.delete(
-        `/playlists/${playlistId}/tracks`
-      );
-      console.log(response.data);
-    } catch (error) {
-      console.log("error", error);
-    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <Box>
+      {isCreateUserModalOpen && (
+        <CreateUserModal
+          isOpen={isCreateUserModalOpen}
+          setIsOpen={setIsCreateUserModalOpen}
+          getUsers={getUserList}
+        />
+      )}
       <Box className={classes.topBox}>
         <Typography variant="h5">Users</Typography>
         <Button
@@ -82,7 +59,9 @@ function Users() {
           color="secondary"
           className={classes.button}
           startIcon={<AddOutlined />}
-          onClick={createUser}
+          onClick={() => {
+            setIsCreateUserModalOpen(true);
+          }}
         >
           Create User
         </Button>
@@ -107,7 +86,7 @@ function Users() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {userListData.map((row) => (
+                  {userList.map((row) => (
                     <TableRow key={row.id}>
                       <TableCell component="th" scope="row">
                         {row.external_id}
@@ -127,7 +106,6 @@ function Users() {
                           color="primary"
                           className={classes.btnRow}
                           startIcon={<DeleteOutlined />}
-                          onClick={deactivateUser(row.id)}
                         >
                           Remove
                         </Button>
