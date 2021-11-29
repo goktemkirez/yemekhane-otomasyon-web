@@ -1,8 +1,8 @@
 import React from "react";
-import { useState } from "react";
+// import { useState } from "react";
 import {
   Avatar,
-  useTheme,
+  // useTheme,
   Drawer,
   List,
   Typography,
@@ -23,8 +23,8 @@ import { ROUTES } from "../../routes";
 
 export default function SideBar(props) {
   const classes = useStyles();
-  const theme = useTheme();
-  const [open, setOpen] = useState(true);
+  // const theme = useTheme();
+  // const [open, setOpen] = useState(true);
   let history = useHistory();
   const itemsList = [
     {
@@ -45,20 +45,20 @@ export default function SideBar(props) {
   ];
   const itemsListBottom = [];
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
+  // const handleDrawerOpen = () => {
+  //   setOpen(true);
+  // };
 
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+  // const handleDrawerClose = () => {
+  //   setOpen(false);
+  // };
 
   return (
     <Drawer
       className={classes.drawer}
       variant="persistent"
       anchor="left"
-      open={open}
+      open={true}
       classes={{
         paper: classes.drawerPaper,
       }}

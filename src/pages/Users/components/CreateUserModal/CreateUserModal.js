@@ -46,6 +46,7 @@ export default function CreateUserModal(props) {
       const response = await authAxios.post(`/register`, data);
       getUsers();
       setIsOpen(false);
+      console.log(response.data)
     } catch (error) {
       console.log("error", error?.response?.data?.errorMessage);
       setError(error?.response?.data?.errorMessage);

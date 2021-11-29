@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import {
   Box,
-  Button,
+  // Button,
   Container,
-  Typography,
+  // Typography,
   Table,
   TableBody,
   TableCell,
@@ -13,7 +13,7 @@ import {
   Paper,
 } from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
-import { AddOutlined } from "@material-ui/icons";
+// import { AddOutlined } from "@material-ui/icons";
 
 import authAxios from "../../components/axios";
 import { useStyles } from "./Records.style";

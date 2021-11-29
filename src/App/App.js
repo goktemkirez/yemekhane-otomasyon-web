@@ -7,14 +7,13 @@ import { ROUTES, routes } from "../routes";
 
 import { useStyles } from "./App.style";
 import PageWrapper from "../components/PageWrapper";
-import authAxios from "../components/axios";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 function App() {
   const classes = useStyles();
 
   const RenderedRoute = (props) => {
-    const { path, component, name, isPublic } = props;
+    const { path, component, isPublic } = props;
     const Component = component;
 
     return (
