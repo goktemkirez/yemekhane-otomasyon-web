@@ -1,5 +1,5 @@
 import { Route, BrowserRouter, Switch, Redirect } from "react-router-dom";
-import { Box } from "@material-ui/core";
+import { Box, ThemeProvider } from "@material-ui/core";
 
 import SideBar from "../components/SideBar";
 
@@ -8,6 +8,7 @@ import { ROUTES, routes } from "../routes";
 import { useStyles } from "./App.style";
 import PageWrapper from "../components/PageWrapper";
 import React from "react";
+import { lightTheme } from "../theme";
 
 function App() {
   const classes = useStyles();
@@ -39,24 +40,26 @@ function App() {
   };
 
   return (
-    <Box className={classes.appWrapper}>
-      <BrowserRouter>
-        <Switch>
-          {routes.map((route) => {
-            return (
-              <RenderedRoute
-                key={route.path}
-                exact
-                path={route.path}
-                component={route.component}
-                isPublic={route.isPublic}
-              />
-            );
-          })}
-          <Redirect to={ROUTES.DASHBOARD} />
-        </Switch>
-      </BrowserRouter>
-    </Box>
+    <ThemeProvider theme={lightTheme}>
+      <Box className={classes.appWrapper}>
+        <BrowserRouter>
+          <Switch>
+            {routes.map((route) => {
+              return (
+                <RenderedRoute
+                  key={route.path}
+                  exact
+                  path={route.path}
+                  component={route.component}
+                  isPublic={route.isPublic}
+                />
+              );
+            })}
+            <Redirect to={ROUTES.DASHBOARD} />
+          </Switch>
+        </BrowserRouter>
+      </Box>
+    </ThemeProvider>
   );
 }
 

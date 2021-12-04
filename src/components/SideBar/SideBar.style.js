@@ -33,6 +33,7 @@ export const useStyles = makeStyles((theme) => ({
   drawerPaper: {
     width: drawerWidth,
     backgroundColor: "#F4F5F7",
+    padding: 0,
   },
   drawerHeader: {
     width: "100%",

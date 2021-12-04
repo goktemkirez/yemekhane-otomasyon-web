@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import {
   Box,
   Button,
@@ -21,6 +22,7 @@ import CreateUserModal from "./components/CreateUserModal";
 
 function Users() {
   const classes = useStyles();
+  let history = useHistory();
   const [loading, setLoading] = useState(false);
   const [userList, setUserList] = useState([]);
   const [isCreateUserModalOpen, setIsCreateUserModalOpen] = useState(false);
@@ -98,6 +100,9 @@ function Users() {
                           variant="contained"
                           color="primary"
                           className={classes.btnRow}
+                          onClick={() => {
+                            history.push(`/users/${row.external_id}/detail`);
+                          }}
                         >
                           Detail
                         </Button>

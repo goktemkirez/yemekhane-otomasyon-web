@@ -57,7 +57,8 @@ function Records() {
                 <TableHead>
                   <TableRow>
                     <TableCell>ID</TableCell>
-                    <TableCell align="right">User Id</TableCell>
+                    <TableCell align="right">Name</TableCell>
+                    <TableCell align="right">Surname</TableCell>
                     <TableCell align="right">Created Date - Time</TableCell>
                   </TableRow>
                 </TableHead>
@@ -67,7 +68,8 @@ function Records() {
                       <TableCell component="th" scope="row">
                         {row.id}
                       </TableCell>
-                      <TableCell align="right">{row.user_id}</TableCell>
+                      <TableCell align="right">{row.user.firstname}</TableCell>
+                      <TableCell align="right">{row.user.lastname}</TableCell>
                       <TableCell align="right">{row.created_at}</TableCell>
                     </TableRow>
                   ))}
